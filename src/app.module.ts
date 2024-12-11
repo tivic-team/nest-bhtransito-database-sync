@@ -6,6 +6,8 @@ import { QUERY_MANAGER } from "./application/gateway/query-manager.interface";
 import { DrizzleQueryManager } from "./infrastructure/gateway-impl/drizzle-query-manager";
 import { CACHE_STORAGE_REPOSITORY } from "./application/repository/cache-repository.interface";
 import { RedisRepository } from "./infrastructure/config/database/redis";
+import { ParametroRepositoryImpl } from "./infrastructure/repository/parametro-repository-impl";
+import { PARAMETRO_REPOSITORY } from "./application/repository/parametro-repository.interface";
 
 @Module({
     imports: [ScheduleModule.forRoot()],
@@ -14,6 +16,7 @@ import { RedisRepository } from "./infrastructure/config/database/redis";
         SynchronizeService,
         DrizzleQueryManager,
         RedisRepository,
+        ParametroRepositoryImpl,
         {
             provide: QUERY_MANAGER,
             useExisting: DrizzleQueryManager,
@@ -21,6 +24,10 @@ import { RedisRepository } from "./infrastructure/config/database/redis";
         {
             provide: CACHE_STORAGE_REPOSITORY,
             useExisting: RedisRepository,
+        },
+        {
+            provide: PARAMETRO_REPOSITORY,
+            useClass: ParametroRepositoryImpl,
         },
     ],
     controllers: [],

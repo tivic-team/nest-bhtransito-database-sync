@@ -3,7 +3,6 @@ import { environment } from "src/infrastructure/config/environments/env";
 
 export const databaseConfig: Config = {
     out: "./drizzle",
-    schema: "./src/database/schema.drizzle.ts",
     dialect: "postgresql",
     dbCredentials: {
         host: environment.databaseHost,

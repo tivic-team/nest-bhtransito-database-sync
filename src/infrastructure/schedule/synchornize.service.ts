@@ -38,17 +38,20 @@ export class SynchronizeService {
     private async syncEquipamentos() {
         const dadosEquipamentos = await this.getEquipamentoFullDataQuery.execute();
 
-        dadosEquipamentos.forEach((equipamento) => {
+        dadosEquipamentos.forEach(async (equipamento) => {
             const { idEquipamento, ...data } = equipamento;
-            this.cacheStorageRepository.setValue(String(idEquipamento), JSON.stringify(data));
+            await this.cacheStorageRepository.setValue(String(idEquipamento), JSON.stringify(data));
         });
     }
 
     private async syncParametros() {
         const parametros = await this.parametroRepository.getParametros();
 
-        parametros.forEach((parametro) => {
-            this.cacheStorageRepository.setValue(parametro.nmParametro, parametro.vlParametro);
+        parametros.forEach(async (parametro) => {
+            await this.cacheStorageRepository.setValue(
+                parametro.nmParametro,
+                parametro.vlParametro,
+            );
         });
     }
 }

@@ -1,4 +1,6 @@
 type ProcessEnv = {
+    PORT: string;
+
     DB_TYPE: string;
     DB_HOST: string;
     DB_PORT: string;
@@ -19,6 +21,7 @@ type Environment = {
     databaseName: string;
     databaseType: string;
     cronExpression: string;
+    port: number;
 
     redisHost: string;
     redisPort: number;

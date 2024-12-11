@@ -1,19 +1,19 @@
 import { Module } from "@nestjs/common";
 import { ScheduleModule } from "@nestjs/schedule";
-import { SynchronizeService } from "./infrastructure/schedule/synchornize.service";
-import { GetEquipamentoFullDataQuery } from "./application/query/get-equipamento-full-data.query";
+import { SynchronizeSchedule } from "./infrastructure/adapter/schedule/synchornize.schedule";
+import { GetEquipamentoFullDataQuery } from "./infrastructure/adapter/query/get-equipamento-full-data.query";
 import { QUERY_MANAGER } from "./application/gateway/query-manager.interface";
-import { DrizzleQueryManager } from "./infrastructure/gateway-impl/drizzle-query-manager";
+import { DrizzleQueryManager } from "./infrastructure/adapter/query/drizzle-query-manager";
 import { CACHE_STORAGE_REPOSITORY } from "./application/repository/cache-repository.interface";
 import { RedisRepository } from "./infrastructure/config/database/redis";
-import { ParametroRepositoryImpl } from "./infrastructure/repository/parametro-repository-impl";
+import { ParametroRepositoryImpl } from "./infrastructure/adapter/repository/parametro-repository.impl";
 import { PARAMETRO_REPOSITORY } from "./application/repository/parametro-repository.interface";
 
 @Module({
     imports: [ScheduleModule.forRoot()],
     providers: [
         GetEquipamentoFullDataQuery,
-        SynchronizeService,
+        SynchronizeSchedule,
         DrizzleQueryManager,
         RedisRepository,
         ParametroRepositoryImpl,

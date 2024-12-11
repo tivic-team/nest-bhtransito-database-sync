@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { sql } from "drizzle-orm";
 import { Drizzle } from "src/infrastructure/config/database/db";
-import { QUERY_MANAGER, QueryManager } from "../gateway/query-manager.interface";
+import { QUERY_MANAGER, QueryManager } from "../../../application/gateway/query-manager.interface";
 
 interface Equipamento {
     idEquipamento: string;

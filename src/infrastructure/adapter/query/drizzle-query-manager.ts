@@ -1,5 +1,5 @@
 import { QueryManager } from "src/application/gateway/query-manager.interface";
-import { Drizzle } from "../config/database/db";
+import { Drizzle } from "../../config/database/db";
 import { SQL } from "drizzle-orm";
 
 export class DrizzleQueryManager implements QueryManager {

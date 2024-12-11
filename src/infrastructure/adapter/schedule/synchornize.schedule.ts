@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { environment } from "../config/environments/env";
+import { environment } from "../../config/environments/env";
 import { Cron } from "@nestjs/schedule";
-import { GetEquipamentoFullDataQuery } from "../../application/query/get-equipamento-full-data.query";
+import { GetEquipamentoFullDataQuery } from "../query/get-equipamento-full-data.query";
 import {
     CACHE_STORAGE_REPOSITORY,
     ICacheStorageRepository,
@@ -12,8 +12,8 @@ import {
 } from "src/application/repository/parametro-repository.interface";
 
 @Injectable()
-export class SynchronizeService {
-    private readonly logger = new Logger(SynchronizeService.name);
+export class SynchronizeSchedule {
+    private readonly logger = new Logger(SynchronizeSchedule.name);
 
     constructor(
         private readonly getEquipamentoFullDataQuery: GetEquipamentoFullDataQuery,

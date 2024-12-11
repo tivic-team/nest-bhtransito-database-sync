@@ -33,12 +33,10 @@ export class AutomationService implements OnModuleInit {
             }
 
             await this.confirmarAits(aits);
-
             environment.gravarLogAits && this.gravarAits(aits, "updated");
             this.logger.log("Processo finalizado com sucesso");
         } catch (e) {
             this.logger.error(e);
-            console.log(e);
         }
     }
 

@@ -72,7 +72,7 @@ export class AitRepositoryImpl implements IAitRepository {
         return result[0] ? new Ait(result[0]) : null;
     }
 
-    async saveAll(aits: any[]): Promise<Ait[]> {
+    async saveAll(aits: Ait[]): Promise<Ait[]> {
         const aitsPromisse = aits.map(async (ait) => {
             return this.save(ait);
         });

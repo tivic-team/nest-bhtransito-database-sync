@@ -8,7 +8,6 @@ export type AitProps = {
     stAit: StAitEnum;
     cdEquipamento: number;
 };
-
 export class Ait {
     private codigoAit: number;
     private dtInfracao: Date;
@@ -25,13 +24,18 @@ export class Ait {
     }
 
     public confirmar(nrAit: number) {
-        this.nrAit = String(environment.inserirPrefixoRT ? "RT" + nrAit : this.nrAit);
+        this.nrAit = this.buildNrAit(nrAit);
         this.stAit = StAitEnum.CONFIRMADO;
     }
 
-    getCodigoAit = () => this.codigoAit;
-    getDtInfracao = () => this.dtInfracao;
-    getcdEquipamento = () => this.cdEquipamento;
-    getNrAit = () => this.nrAit;
-    getStAit = () => this.stAit;
+    private buildNrAit(nrAit: number){
+        const customNrAit = "RT" + nrAit.toFixed(0).padStart(10, "0");
+        return String(environment.inserirPrefixoRT ? customNrAit : this.nrAit);
+    }
+
+    public getCodigoAit = () => this.codigoAit;
+    public getDtInfracao = () => this.dtInfracao;
+    public getcdEquipamento = () => this.cdEquipamento;
+    public getNrAit = () => this.nrAit;
+    public getStAit = () => this.stAit;
 }

@@ -6,7 +6,7 @@
         "plugin:vitest/recommended"
     ],
     "plugins": [
-        
+        "vitest"
     ],
     "rules": {
         "prettier/prettier": "error",

@@ -1,5 +1,5 @@
 import { defineConfig, Config } from "drizzle-kit";
-import { environment } from "src/infrastructure/environments/env";
+import { environment } from "src/infrastructure/config/environments/env";
 
 export const databaseConfig: Config = {
     out: "./drizzle",

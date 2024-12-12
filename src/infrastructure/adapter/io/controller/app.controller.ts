@@ -12,6 +12,11 @@ export class AppController {
 
     @Get("/execute")
     async execute() {
-        await this.synchronizeService.synchronize();
+        try {
+            await this.synchronizeService.synchronize();
+            return { message: "✅ Dados sincronizados com sucesso" };
+        } catch (error) {
+            return { message: `❌ Erro ao executar serviço: ${error.message}` };
+        }
     }
 }

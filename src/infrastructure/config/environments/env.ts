@@ -5,6 +5,10 @@ import { getIntEnv } from "./env.utils";
 const processEnv = process.env as ProcessEnv;
 export const environment: Environment = {
     port: getIntEnv(processEnv.PORT),
+    host: processEnv.HOST,
+    context: processEnv.CONTEXT,
+    protocol: processEnv.PROTOCOL,
+
     databaseHost: processEnv.DB_HOST,
     databasePort: getIntEnv(processEnv.DB_PORT),
     databaseUsername: processEnv.DB_USERNAME,

@@ -1,31 +1,25 @@
 import { VariavelDeAmbienteAusenteException } from "./environment-ausente.exception";
 
 export function validateEnv(environment: Environment): void {
-    if (!environment.databaseHost) {
-        throw new VariavelDeAmbienteAusenteException("DB_HOST");
-    }
-    if (!environment.databasePort) {
-        throw new VariavelDeAmbienteAusenteException("DB_PORT");
-    }
-    if (!environment.databaseUsername) {
-        throw new VariavelDeAmbienteAusenteException("DB_USERNAME");
-    }
-    if (!environment.databasePassword) {
-        throw new VariavelDeAmbienteAusenteException("DB_PASSWORD");
-    }
-    if (!environment.databaseName) {
-        throw new VariavelDeAmbienteAusenteException("DB_DATABASE");
-    }
-    if (!environment.databaseType) {
-        throw new VariavelDeAmbienteAusenteException("DB_TYPE");
-    }
-    if (!environment.cronExpression) {
-        throw new VariavelDeAmbienteAusenteException("CRON_EXPRESSION");
-    }
-    if (!environment.redisHost) {
-        throw new VariavelDeAmbienteAusenteException("REDIS_HOST");
-    }
-    if (!environment.redisPort) {
-        throw new VariavelDeAmbienteAusenteException("REDIS_PORT");
+    const requiredVariables = {
+        databaseHost: "DB_HOST",
+        databasePort: "DB_PORT",
+        databaseUsername: "DB_USERNAME",
+        databasePassword: "DB_PASSWORD",
+        databaseName: "DB_DATABASE",
+        databaseType: "DB_TYPE",
+        cronExpression: "CRON_EXPRESSION",
+        redisHost: "REDIS_HOST",
+        redisPort: "REDIS_PORT",
+        port: "PORT",
+        host: "HOST",
+        context: "CONTEXT",
+        protocol: "PROTOCOL",
+    };
+
+    for (const [key, variableName] of Object.entries(requiredVariables)) {
+        if (!environment[key as keyof Environment]) {
+            throw new VariavelDeAmbienteAusenteException(variableName);
+        }
     }
 }

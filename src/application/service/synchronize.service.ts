@@ -1,7 +1,5 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { environment } from "../../config/environments/env";
-import { Cron } from "@nestjs/schedule";
-import { GetEquipamentoFullDataQuery } from "../query/get-equipamento-full-data.query";
+import { GetEquipamentoFullDataQuery } from "src/infrastructure/adapter/persistence/query/get-equipamento-full-data.query";
 import {
     CACHE_STORAGE_REPOSITORY,
     ICacheStorageRepository,
@@ -12,9 +10,8 @@ import {
 } from "src/application/repository/parametro-repository.interface";
 
 @Injectable()
-export class SynchronizeSchedule {
-    private readonly logger = new Logger(SynchronizeSchedule.name);
-
+export class SynchronizeService {
+    private readonly logger = new Logger(SynchronizeService.name);
     constructor(
         private readonly getEquipamentoFullDataQuery: GetEquipamentoFullDataQuery,
         @Inject(CACHE_STORAGE_REPOSITORY)
@@ -24,7 +21,6 @@ export class SynchronizeSchedule {
         private readonly parametroRepository: IParametroRepository,
     ) {}
 
-    @Cron(environment.cronExpression)
     async synchronize() {
         try {
             await this.syncEquipamentos();
@@ -46,12 +42,6 @@ export class SynchronizeSchedule {
 
     private async syncParametros() {
         const parametros = await this.parametroRepository.getParametros();
-
-        parametros.forEach(async (parametro) => {
-            await this.cacheStorageRepository.setValue(
-                parametro.nmParametro,
-                parametro.vlParametro,
-            );
-        });
+        await this.cacheStorageRepository.setValue("parametros", JSON.stringify(parametros));
     }
 }

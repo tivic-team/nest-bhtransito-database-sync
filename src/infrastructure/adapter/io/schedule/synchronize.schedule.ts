@@ -8,7 +8,7 @@ import { SynchronizeService } from "src/application/service/synchronize.service"
 export class SynchronizeSchedule {
     constructor(private readonly synchronizeService: SynchronizeService) {}
 
-    @Cron(environment.cronExpression)
+    // @Cron(environment.cronExpression)
     async synchronize() {
         await this.synchronizeService.synchronize();
     }

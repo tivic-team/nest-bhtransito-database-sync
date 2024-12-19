@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Inject, Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
 import { GetEquipamentoFullDataQuery } from "src/infrastructure/adapter/persistence/query/get-equipamento-full-data.query";
 import {
     CACHE_STORAGE_REPOSITORY,
@@ -13,12 +13,11 @@ import {
 export class SynchronizeService {
     private readonly logger = new Logger(SynchronizeService.name);
     constructor(
-        private readonly getEquipamentoFullDataQuery: GetEquipamentoFullDataQuery,
         @Inject(CACHE_STORAGE_REPOSITORY)
         private readonly cacheStorageRepository: ICacheStorageRepository,
-
         @Inject(PARAMETRO_REPOSITORY)
         private readonly parametroRepository: IParametroRepository,
+        private readonly getEquipamentoFullDataQuery: GetEquipamentoFullDataQuery,
     ) {}
 
     async synchronize() {
@@ -27,7 +26,8 @@ export class SynchronizeService {
             await this.syncParametros();
             this.logger.log(`✅ Dados sincronizados com sucesso!`);
         } catch (error) {
-            this.logger.error(`❌ Erro ao sincronizar dados: ${error.message}`);
+            this.logger.error(error.message);
+            throw new InternalServerErrorException(error.message);
         }
     }
 

@@ -54,10 +54,13 @@ export class GetEquipamentoFullDataQuery {
 
     private async getEquipamentos(): Promise<EquipamentoDTO[]> {
         const result = await this.queryManager.execute(sql`
-            SELECT id_equipamento, cd_equipamento, lg_metrologico, nr_serie 
-            FROM opr_equipamento
+            SELECT A.id_equipamento, A.cd_equipamento, 
+		        A.lg_metrologico, A.nr_serie, B.qt_tempo_retardo
+            FROM opr_equipamento as A
+            JOIN opr_equipamento_registro_objeto as B ON B.cd_equipamento = A.cd_equipamento
         `);
         const rows: EquipamentoDTO[] = result.map((row) => ({
+            qtTempoRetardo: row.qt_tempo_retardo as number,
             idEquipamento: row.id_equipamento as string,
             cdEquipamento: row.cd_equipamento as number,
             lgMetrologico: row.lg_metrologico as number,

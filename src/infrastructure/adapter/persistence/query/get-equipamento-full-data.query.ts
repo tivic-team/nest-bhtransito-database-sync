@@ -35,14 +35,14 @@ export class GetEquipamentoFullDataQuery {
 
     private async getFaixas(): Promise<FaixaDTO[]> {
         const result = await this.queryManager.execute(sql`
-            SELECT A.nr_faixa, A.cd_faixa, A.cd_equipamento, B.nm_sentido_via AS sentido_via_origem, 
+            SELECT A.nr_faixa,A.tp_sentido, A.cd_faixa, A.cd_equipamento, B.nm_sentido_via AS sentido_via_origem, 
             C.nm_sentido_via AS sentido_via_destino FROM opr_faixa AS A
             LEFT JOIN opr_sentido_via AS B ON B.cd_sentido_via = A.cd_sentido_via_origem
             LEFT JOIN opr_sentido_via AS C ON C.cd_sentido_via = A.cd_sentido_via_destino
         `);
 
         const rows: FaixaDTO[] = result.map((row) => ({
-            tpSentido: row.tp_sentido as number,
+            tpSentido: row.tp_sentido as number ?? null,
             nrFaixa: row.nr_faixa as number,
             cdFaixa: row.cd_faixa as number,
             cdEquipamento: row.cd_equipamento as number,

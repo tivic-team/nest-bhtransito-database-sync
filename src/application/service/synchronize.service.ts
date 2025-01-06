@@ -1,5 +1,5 @@
 import { Inject, Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
-import { SyncQuerys } from "src/infrastructure/adapter/persistence/query/sync-querys";
+import { SyncQuerys } from "src/infrastructure/adapter/persistence/query/core/sync-querys";
 import {
     CACHE_STORAGE_REPOSITORY,
     ICacheStorageRepository,

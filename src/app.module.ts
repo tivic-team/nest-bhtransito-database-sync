@@ -6,19 +6,25 @@ import { CACHE_STORAGE_REPOSITORY } from "./application/repository/cache-reposit
 import { RedisRepository } from "./infrastructure/config/database/redis";
 import { ParametroRepositoryImpl } from "./infrastructure/adapter/persistence/repository/parametro-repository.impl";
 import { PARAMETRO_REPOSITORY } from "./application/repository/parametro-repository.interface";
-import { SyncQuerys } from "./infrastructure/adapter/persistence/query/sync-querys";
-import { DrizzleQueryManager } from "./infrastructure/adapter/persistence/query/drizzle-query-manager";
+import { SyncQuerys } from "./infrastructure/adapter/persistence/query/core/sync-querys";
+import { DrizzleQueryManager } from "./infrastructure/adapter/persistence/query/core/drizzle-query-manager";
 import { SynchronizeService } from "./application/service/synchronize.service";
 import { AppController } from "./infrastructure/adapter/io/controller/app.controller";
 import { GetEquipamentoQuery } from "./infrastructure/adapter/persistence/query/get-equipamentos.query";
 import { GetFaixasQuery } from "./infrastructure/adapter/persistence/query/get-faixas.query";
+import { GetDeteccoesMidiaQuery } from "./infrastructure/adapter/persistence/query/get-deteccoes-midia.query";
+import { GetImagensTesteQuery } from "./infrastructure/adapter/persistence/query/get-imagens-teste.query";
+import { GetFaixasInfracoesQuery } from "./infrastructure/adapter/persistence/query/get-faixa-infracao.query";
 
 @Module({
     imports: [ScheduleModule.forRoot()],
     providers: [
         SynchronizeService,
         SyncQuerys,
+        GetDeteccoesMidiaQuery,
         GetEquipamentoQuery,
+        GetImagensTesteQuery,
+        GetFaixasInfracoesQuery,
         GetFaixasQuery,
         SynchronizeSchedule,
         DrizzleQueryManager,

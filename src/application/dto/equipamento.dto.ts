@@ -1,3 +1,4 @@
+import { DeteccaoMidiaDTO } from "./deteccao-midia.dto";
 import { FaixaDTO } from "./faixa.dto";
 
 export interface EquipamentoDTO {
@@ -7,5 +8,6 @@ export interface EquipamentoDTO {
     lgMetrologico: number;
     vlLimite?: number;
     nrSerie: string;
-    faixas?: Omit<FaixaDTO, "cdEquipamento">[];
+    faixas: Omit<FaixaDTO, "cdEquipamento">[];
+    deteccoesMidia: Omit<DeteccaoMidiaDTO, "cdEquipamento">[];
 }

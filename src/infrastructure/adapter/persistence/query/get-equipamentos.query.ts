@@ -25,6 +25,8 @@ export class GetEquipamentoQuery {
             cdEquipamento: row.cd_equipamento as number,
             lgMetrologico: row.lg_metrologico as number,
             nrSerie: row.nr_serie as string,
+            deteccoesMidia: [],
+            faixas: [],
         }));
 
         return rows;

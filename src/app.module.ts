@@ -6,16 +6,20 @@ import { CACHE_STORAGE_REPOSITORY } from "./application/repository/cache-reposit
 import { RedisRepository } from "./infrastructure/config/database/redis";
 import { ParametroRepositoryImpl } from "./infrastructure/adapter/persistence/repository/parametro-repository.impl";
 import { PARAMETRO_REPOSITORY } from "./application/repository/parametro-repository.interface";
-import { GetEquipamentoFullDataQuery } from "./infrastructure/adapter/persistence/query/get-equipamento-full-data.query";
+import { SyncQuerys } from "./infrastructure/adapter/persistence/query/sync-querys";
 import { DrizzleQueryManager } from "./infrastructure/adapter/persistence/query/drizzle-query-manager";
 import { SynchronizeService } from "./application/service/synchronize.service";
 import { AppController } from "./infrastructure/adapter/io/controller/app.controller";
+import { GetEquipamentoQuery } from "./infrastructure/adapter/persistence/query/get-equipamentos.query";
+import { GetFaixasQuery } from "./infrastructure/adapter/persistence/query/get-faixas.query";
 
 @Module({
     imports: [ScheduleModule.forRoot()],
     providers: [
         SynchronizeService,
-        GetEquipamentoFullDataQuery,
+        SyncQuerys,
+        GetEquipamentoQuery,
+        GetFaixasQuery,
         SynchronizeSchedule,
         DrizzleQueryManager,
         RedisRepository,

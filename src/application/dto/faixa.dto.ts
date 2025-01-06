@@ -5,4 +5,5 @@ export interface FaixaDTO {
     cdEquipamento: number;
     sentidoViaOrigem: string;
     sentidoViaDestino: string;
+    dsInfracoes: string[];
 }

@@ -1,5 +1,5 @@
 import { Inject, Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
-import { GetEquipamentoFullDataQuery } from "src/infrastructure/adapter/persistence/query/get-equipamento-full-data.query";
+import { SyncQuerys } from "src/infrastructure/adapter/persistence/query/sync-querys";
 import {
     CACHE_STORAGE_REPOSITORY,
     ICacheStorageRepository,
@@ -17,7 +17,7 @@ export class SynchronizeService {
         private readonly cacheStorageRepository: ICacheStorageRepository,
         @Inject(PARAMETRO_REPOSITORY)
         private readonly parametroRepository: IParametroRepository,
-        private readonly getEquipamentoFullDataQuery: GetEquipamentoFullDataQuery,
+        private readonly syncQuerys: SyncQuerys,
     ) {}
 
     async synchronize() {
@@ -32,7 +32,7 @@ export class SynchronizeService {
     }
 
     private async syncEquipamentos() {
-        const dadosEquipamentos = await this.getEquipamentoFullDataQuery.execute();
+        const dadosEquipamentos = await this.syncQuerys.execute();
 
         dadosEquipamentos.forEach(async (equipamento) => {
             const { idEquipamento, ...data } = equipamento;

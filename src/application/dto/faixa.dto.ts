@@ -8,6 +8,7 @@ export interface FaixaDTO {
     cdEquipamento: number;
     sentidoViaDestino: string;
     sentidoViaOrigem: string;
-    dsInfracoes: Omit<FaixaInfracaoDTO, "cdFaixa">[];
+
+    infracoes: Omit<FaixaInfracaoDTO, "cdFaixa">[];
     imagensTeste: Omit<ImagemTesteDTO, "cdFaixa">[];
 }

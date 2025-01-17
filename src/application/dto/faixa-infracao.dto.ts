@@ -1,4 +1,4 @@
 export interface InfracaoDTO {
     cdFaixa: number;
-    dsInfracao: string;
+    cdInfracao: number;
 }

@@ -34,7 +34,7 @@ export class GetFaixasQuery {
             cdEquipamento: faixa.cd_equipamento as number,
             sentidoViaDestino: faixa.sentido_via_destino as string,
             sentidoViaOrigem: faixa.sentido_via_origem as string,
-            dsInfracoes: this.extractInfracoes(infracoes, faixa.cd_faixa as number),
+            infracoes: this.extractInfracoes(infracoes, faixa.cd_faixa as number),
             imagensTeste: this.extractImagensTeste(imagensTeste, faixa.cd_faixa as number),
         }));
 

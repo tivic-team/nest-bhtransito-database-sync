@@ -12,13 +12,13 @@ export class GetFaixasInfracoesQuery {
 
     async exec(): Promise<InfracaoDTO[]> {
         const result = await this.queryManager.execute(sql`
-            SELECT E.ds_infracao, A.cd_faixa FROM opr_faixa AS A
+            SELECT E.cd_infracao, A.cd_faixa FROM opr_faixa AS A
             LEFT JOIN opr_faixa_infracao AS D ON D.cd_faixa = A.cd_faixa
             LEFT JOIN opr_infracao AS E ON E.cd_infracao = D.cd_infracao
         `);
 
         return result.map((row) => ({
-            dsInfracao: row.ds_infracao as string,
+            cdInfracao: row.cd_infracao as number,
             cdFaixa: row.cd_faixa as number,
         }));
     }
